@@ -1,95 +1,66 @@
-import XCTest
+import Testing
 
-@testable import PoetryClub
-
-final class PoetryClubTests: XCTestCase {
-
-  func testSplitNewlines() {
-    XCTAssertEqual(
-      splitOnNewlines("Winken.\nBlinken\n\nAnd Nod."),
-      ["Winken.", "Blinken", "", "And Nod."]
-    )
-  }
-
-  func testSplitNoNewlines() throws {
+struct PoetryClubTests {
     
-    XCTAssertEqual(splitOnNewlines("Hello."), ["Hello."])
-  }
-
-  func testFirstLetter() throws {
+    @Test func testSplitNewlines() async throws {
+        #expect(
+            splitOnNewlines("Winken.\nBlinken\n\nAnd Nod.") ==
+            ["Winken.", "Blinken", "", "And Nod."]
+        )
+    }
     
-    XCTAssertEqual(firstLetter("Lorem ipsum"), "L")
-  }
-
-  func testFirstLetterEmpty() throws {
+    @Test func testSplitNoNewlines() async throws {
+        #expect(splitOnNewlines("Hello.") == ["Hello."])
+    }
     
-    XCTAssertEqual(firstLetter(""), "_")
-  }
-
-  func testCapitalize() throws {
+    @Test func testFirstLetter() async throws {
+        #expect(firstLetter("Lorem ipsum") == "L")
+    }
     
-    XCTAssertEqual(capitalize("HORSES for CoUrSeS!"), "Horses For Courses!")
-  }
-
-  func testTrimWithWhitespace() throws {
+    @Test func testFirstLetterEmpty() async throws {
+        #expect(firstLetter("") == "_")
+    }
     
-    XCTAssertEqual(
-      trimSentence("Is all the whitespace gone?   \t  \t"),
-      "Is all the whitespace gone?"
-    )
-  }
-
-  func testTrimWithoutWhitespace() throws {
+    @Test func testCapitalize() async throws {
+        #expect(capitalize("HORSES for CoUrSeS!") == "Horses For Courses!")
+    }
     
-    XCTAssertEqual(
-      trimSentence("Is all the whitespace gone?"),
-      "Is all the whitespace gone?"
-    )
-  }
-
-  func testLastLetter() throws {
+    @Test func testTrimWithWhitespace() async throws {
+        #expect(
+            trimSentence("Is all the whitespace gone?   \t  \t") ==
+            "Is all the whitespace gone?"
+        )
+    }
     
-    XCTAssertEqual(lastLetter("Lorem ipsum"), "m")
-  }
-
-  func testLastLetterEmpty() throws {
+    @Test func testTrimWithoutWhitespace() async throws {
+        #expect(
+            trimSentence("Is all the whitespace gone?") ==
+            "Is all the whitespace gone?"
+        )
+    }
     
-    XCTAssertEqual(lastLetter(""), "_")
-  }
-
-  func testBackdoorPassword() throws {
+    @Test func testLastLetter() async throws {
+        #expect(lastLetter("Lorem ipsum") == "m")
+    }
     
-    XCTAssertEqual(backDoorPassword("scoobyDOO!"), "Scoobydoo!, please")
-  }
-
-  func testIthLetter() throws {
+    @Test func testLastLetterEmpty() async throws {
+        #expect(lastLetter("") == "_")
+    }
     
-    XCTAssertEqual(ithLetter("Inquisitive", i: 2), "q")
-  }
-
-  func testIthLetterInvalid() throws {
+    @Test func testBackdoorPassword() async throws {
+        #expect(backDoorPassword("scoobyDOO!") == "Scoobydoo!, please")
+    }
     
-    XCTAssertEqual(ithLetter("Inquisitive", i: 100), " ")
-  }
-
-  func testSecretRoomPassword() throws {
+    @Test func testIthLetter() async throws {
+        #expect(ithLetter("Inquisitive", i: 2) == "q")
+    }
     
-    XCTAssertEqual(secretRoomPassword("Open Sesame"), "OPEN SESAME!")
-  }
-
-  static var allTests = [
-    ("testSplitNewlines", testSplitNewlines),
-    ("testSplitNoNewlines", testSplitNoNewlines),
-    ("testFirstLetter", testFirstLetter),
-    ("testFirstLetterEmpty", testFirstLetterEmpty),
-    ("testCapitalize", testCapitalize),
-    ("testTrimWithWhitespace", testTrimWithWhitespace),
-    ("testTrimWithoutWhitespace", testTrimWithoutWhitespace),
-    ("testLastLetter", testLastLetter),
-    ("testLastLetterEmpty", testLastLetterEmpty),
-    ("testBackdoorPassword", testBackdoorPassword),
-    ("testIthLetter", testIthLetter),
-    ("testIthLetterInvalid", testIthLetterInvalid),
-    ("testSecretRoomPassword", testSecretRoomPassword),
-  ]
+    @Test func testIthLetterInvalid() async throws {
+        #expect(ithLetter("Inquisitive", i: 100) == " ")
+    }
+    
+    @Test func testSecretRoomPassword() async throws {
+        #expect(secretRoomPassword("Open Sesame") == "OPEN SESAME!")
+    }
+    
 }
